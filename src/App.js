@@ -1,22 +1,11 @@
-import logo from "./logo.svg";
-import "./App.css";
+import "./styles/App.css";
+import Board from "./components/Board";
 
 function App(props) {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Codecademy </p>
-        <p>{props.name}</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Career Potato</h1>
+      <Board />
     </div>
   );
 }
