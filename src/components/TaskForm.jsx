@@ -2,26 +2,117 @@ import React, { useState } from "react";
 import "../styles/TaskFormStyles.css";
 
 function TaskForm({ onAddTask }) {
-  const [newTask, setNewTask] = useState("");
+  const [formData, setFormData] = useState({
+    title: "",
+    company: "",
+    link: "",
+    description: "",
+    dateApplied: "",
+    salaryOffered: "",
+    salaryAskedFor: "",
+    notes: "",
+    attachment: null,
+  });
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      prevData,
+      [name]: value,
+    }));
+  };
 
-  const handleAddTask = (e) => {
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setFormData((prevData) => ({
+      ...prevData,
+      attachment: file,
+    }));
+  };
+
+  // const [newTask, setNewTask] = useState("");
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (newTask.trim() === "") return;
-    onAddTask(newTask);
-    setNewTask("");
+    if (formData.title.trim() === "") return;
+    onAddTask(formData);
+    setFormData({
+      title: "",
+      company: "",
+      link: "",
+      description: "",
+      dateApplied: "",
+      salaryOffered: "",
+      salaryAskedFor: "",
+      notes: "",
+      attachment: null,
+    });
   };
 
   return (
-    <form onSubmit={handleAddTask} className="task-form">
+    <form onSubmit={handleSubmit} className="task-form">
       <input
         type="text"
-        placeholder="Enter a new task"
-        value={newTask}
-        onChange={(e) => setNewTask(e.target.value)}
+        name="title"
+        placeholder="Title"
+        value={formData.title}
+        onChange={handleInputChange}
         className="task-input"
       />
+      <textarea
+        name="description"
+        placeholder="Description"
+        value={formData.description}
+        onChange={handleInputChange}
+        className="task-input"
+      />
+      <input
+        type="url"
+        name="link"
+        placeholder="Link"
+        value={formData.sallinkaryAskedFor}
+        onChange={handleInputChange}
+        className="task-input"
+      />
+      <input
+        type="date"
+        name="dateApplied"
+        value={formData.dateApplied}
+        onChange={handleInputChange}
+        className="task-input"
+      />
+      <input
+        type="salaryOffered"
+        name="salaryOffered"
+        placeholder="Salary"
+        value={formData.salaryOffered}
+        onChange={handleInputChange}
+        className="task-input"
+      />
+      <input
+        type="salaryAskedFor"
+        name="salaryAskedFor"
+        placeholder="Salary Asked For"
+        value={formData.salaryAskedFor}
+        onChange={handleInputChange}
+        className="task-input"
+      />
+      <textarea
+        name="notes"
+        placeholder="Notes"
+        value={formData.notes}
+        onChange={handleInputChange}
+        className="task-input"
+      />
+      <input
+        type="file"
+        name="attachment"
+        placeholder="Attachments"
+        onChange={handleFileChange}
+        className="task-input"
+      />
+
       <button type="submit" className="task-button">
-        Add Task
+        Add
       </button>
     </form>
   );
