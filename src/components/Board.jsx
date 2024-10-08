@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Column from "./Column";
 import { DragDropContext } from "react-beautiful-dnd";
-// import BoardStyles from "../styles/BoardStyles.css";
+import "../styles/BoardStyles.css";
 
 function Board() {
   const initialTasks = {

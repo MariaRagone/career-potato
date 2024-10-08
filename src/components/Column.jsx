@@ -1,8 +1,7 @@
 import React from "react";
 import Card from "./Card";
 import { Droppable } from "react-beautiful-dnd";
-
-// import ColumnStyles from "../styles/ColumnStyles.css";
+import "../styles/ColumnStyles.css";
 
 function Column({ title, tasks, id }) {
   return (

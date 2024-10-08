@@ -1,5 +1,6 @@
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
+import "../styles/CardStyles.css";
 
 function Card({ text, index }) {
   return (
