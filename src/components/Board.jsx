@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Column from "./Column";
 import { DragDropContext } from "react-beautiful-dnd";
 import "../styles/BoardStyles.css";
+import TaskForm from "./TaskForm";
 
 function Board() {
   const initialTasks = {
@@ -11,7 +12,7 @@ function Board() {
   };
 
   const [tasks, setTasks] = useState(initialTasks);
-  const [newTask, setNewTask] = useState("");
+  // const [newTask, setNewTask] = useState("");
 
   const onDragEnd = (result) => {
     const { source, destination } = result;
@@ -48,23 +49,28 @@ function Board() {
     }));
   };
 
-  const handleAddTask = (e) => {
-    e.preventDefault();
-    if (newTask.trim() === "") return;
-
+  const addTask = (newTask) => {
     setTasks((prevTasks) => ({
       ...prevTasks,
       todo: [...prevTasks.todo, newTask],
     }));
-
-    setNewTask(""); 
   };
+
+  // const handleAddTask = (e) => {
+  //   e.preventDefault();
+  //   if (newTask.trim() === "") return;
+
+  //   setTasks((prevTasks) => ({
+  //     ...prevTasks,
+  //     todo: [...prevTasks.todo, newTask],
+  //   }));
+
+  //   setNewTask("");
+  // };
 
   return (
     <div className="App">
-      <h1>Kanban Board</h1>
-
-      <form onSubmit={handleAddTask} className="task-form">
+      {/* <form onSubmit={handleAddTask} className="task-form">
         <input
           type="text"
           placeholder="Enter a new task"
@@ -72,14 +78,21 @@ function Board() {
           onChange={(e) => setNewTask(e.target.value)}
           className="task-input"
         />
-        <button type="submit" className="task-button">Add Task</button>
-      </form>
+        <button type="submit" className="task-button">
+          Add Task
+        </button>
+      </form> */}
+      <TaskForm onAddTask={addTask} />
 
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="board">
           {/* Pass the correct IDs as 'id' props */}
           <Column title="To Do" tasks={tasks.todo} id="todo" />
-          <Column title="In Progress" tasks={tasks.inProgress} id="inProgress" />
+          <Column
+            title="In Progress"
+            tasks={tasks.inProgress}
+            id="inProgress"
+          />
           <Column title="Done" tasks={tasks.done} id="done" />
         </div>
       </DragDropContext>
