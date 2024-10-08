@@ -46,12 +46,13 @@ function Board() {
       [destination.droppableId]: finishTasks,
     }));
   };
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="board">
-        <Column title="To Do" tasks={tasks.todo} />
-        <Column title="In Progress" tasks={tasks.inProgress} />
-        <Column title="Done" tasks={tasks.done} />
+        <Column title="To Do" tasks={tasks.todo} id="todo" />
+        <Column title="In Progress" tasks={tasks.inProgress} id="inProgress" />
+        <Column title="Done" tasks={tasks.done} id="done" />
       </div>
     </DragDropContext>
   );

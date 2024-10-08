@@ -14,7 +14,7 @@ function Column({ title, tasks, id }) {
         >
           <h2>{title}</h2>
           {tasks.map((task, index) => (
-            <Card key={index} text={task} />
+            <Card key={index} text={task} index={index} />
           ))}
           {provided.placeholder}
         </div>
