@@ -2,9 +2,9 @@ import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 import "../styles/CardStyles.css";
 
-function Card({ text, index }) {
+function Card({ text, index, columnId }) {
   return (
-    <Draggable draggableId={text} index={index}>
+    <Draggable draggableId={`${columnId}-${index}`} index={index}>
       {(provided) => (
         <div
           className="card"
