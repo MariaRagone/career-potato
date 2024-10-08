@@ -6,7 +6,12 @@ function Card({ text, index }) {
   return (
     <Draggable draggableId={text} index={index}>
       {(provided) => (
-        <div className="card">
+        <div
+          className="card"
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          ref={provided.innerRef}
+        >
           <p>{text}</p>
         </div>
       )}
