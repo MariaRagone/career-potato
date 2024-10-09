@@ -5,7 +5,7 @@ import "../styles/ColumnStyles.css";
 
 function Column({ title, tasks, id }) {
   return (
-    <Droppable droppableId={id}> 
+    <Droppable droppableId={id}>
       {(provided) => (
         <div
           className="column"
@@ -13,9 +13,17 @@ function Column({ title, tasks, id }) {
           ref={provided.innerRef}
         >
           <h2>{title}</h2>
-          {tasks.map((task, index) => (
-            <Card key={index} text={task} index={index} columnId={id} /> 
-          ))}
+          {tasks && tasks.length > 0 ? (  // Add this check
+            tasks.map((task, index) => (
+              task ? (
+                <Card key={task.id} task={task} index={index} />
+              ) : (
+                <div key={index} className="error">Task is undefined</div>
+              )
+            ))
+          ) : (
+            <p>No tasks available</p> // This will display if there are no tasks
+          )}
           {provided.placeholder}
         </div>
       )}

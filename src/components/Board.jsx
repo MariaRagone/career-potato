@@ -1,18 +1,27 @@
 import React, { useState } from "react";
 import Column from "./Column";
+import TaskForm from "./TaskForm";
 import { DragDropContext } from "react-beautiful-dnd";
 import "../styles/BoardStyles.css";
-import TaskForm from "./TaskForm";
 
 function Board() {
   const initialTasks = {
-    todo: ["Task 1", "Task 2"],
-    inProgress: ["Task 4", "Task 5"],
-    done: ["Task 8", "Task 9", "Task 7", "Task 3"],
+    applied: [
+      { title: "Full Stack Software Developer", company: "Pure Desires Ministry", link: "https://puredesire.org/wp-content/uploads/2024/09/Full-Stack-Developer-Job-Description.pdf", description: "", dateApplied: "Sept. 20", salaryOffered: "?", salaryAskedFor: "70-75k", notes: "", attachment: null },
+      { title: "Task 2", description: "Description 2", dueDate: "2023-12-05", priority: "Medium", link: "", attachment: null }
+    ],
+    interview: [
+      { title: "Task 4", description: "Description 4", dueDate: "2023-12-10", priority: "Low", link: "", attachment: null }
+    ],
+    offer: [
+      { title: "Task 8", description: "Description 8", dueDate: "2023-11-20", priority: "Low", link: "", attachment: null }
+    ],
+    rejected: [
+      { title: "Task 8", description: "Description 8", dueDate: "2023-11-20", priority: "Low", link: "", attachment: null }
+    ]
   };
 
   const [tasks, setTasks] = useState(initialTasks);
-  // const [newTask, setNewTask] = useState("");
 
   const onDragEnd = (result) => {
     const { source, destination } = result;
@@ -52,48 +61,21 @@ function Board() {
   const addTask = (newTask) => {
     setTasks((prevTasks) => ({
       ...prevTasks,
-      todo: [...prevTasks.todo, newTask],
+      applied: [...prevTasks.applied, newTask],
     }));
   };
 
-  // const handleAddTask = (e) => {
-  //   e.preventDefault();
-  //   if (newTask.trim() === "") return;
-
-  //   setTasks((prevTasks) => ({
-  //     ...prevTasks,
-  //     todo: [...prevTasks.todo, newTask],
-  //   }));
-
-  //   setNewTask("");
-  // };
-
   return (
     <div className="App">
-      {/* <form onSubmit={handleAddTask} className="task-form">
-        <input
-          type="text"
-          placeholder="Enter a new task"
-          value={newTask}
-          onChange={(e) => setNewTask(e.target.value)}
-          className="task-input"
-        />
-        <button type="submit" className="task-button">
-          Add Task
-        </button>
-      </form> */}
+
       <TaskForm onAddTask={addTask} />
 
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="board">
-          {/* Pass the correct IDs as 'id' props */}
-          <Column title="To Do" tasks={tasks.todo} id="todo" />
-          <Column
-            title="In Progress"
-            tasks={tasks.inProgress}
-            id="inProgress"
-          />
-          <Column title="Done" tasks={tasks.done} id="done" />
+          <Column title="Applied" tasks={tasks.applied} id="applied" />
+          <Column title="Interview" tasks={tasks.interview} id="interview" />
+          <Column title="Offer" tasks={tasks.offer} id="offer" />
+          <Column title="Rejected" tasks={tasks.rejected} id="rejected" />
         </div>
       </DragDropContext>
     </div>
